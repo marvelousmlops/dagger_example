@@ -37,6 +37,6 @@ jobs:
       - name: Build model serving docker image
         uses: docker/build-push-action@v2
         with:
-          context: /tmp
+          context: .
           file: Dockerfile
           tags: "marvelousmlops/dagger_example:latest"
