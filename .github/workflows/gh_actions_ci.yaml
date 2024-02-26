@@ -39,4 +39,4 @@ jobs:
         with:
           context: .
           file: Dockerfile
-          tags: "https://docker.io/marvelousmlops/dagger_example:latest"
+          tags: "marvelousmlops/dagger_example:latest"
