@@ -28,14 +28,15 @@ async def test_and_publish():
         test = runner.with_exec(["pytest", "-v", "tests"])
 
         # build python package
-        py_build = (
+        build_dir = (
             await runner.with_exec(
                 ["python3", "-m", "pip", "install", "--upgrade", "build"]
             )
             .with_exec(["python3", "-m", "build"])
             .directory("dist")
-            .export("dist")
         )
+
+        await build_dir.export("dist")
 
         # build and publish image
         image_ref = "marvelousmlops/dagger_example:latest"
@@ -43,8 +44,7 @@ async def test_and_publish():
             name="dockerhub_secret", plaintext=os.environ["DOCKERHUB_TOKEN"]
         )
         build = (
-            client.host()
-            .directory(".")
+            src.with_directory("/tmp/dist", client.host().directory("dist"))
             .docker_build()
             .with_registry_auth(
                 address=f"https://docker.io/{image_ref}",
