@@ -29,7 +29,9 @@ async def test_and_publish():
 
         # build python package
         py_build = (
-            runner.with_exec(["python3", "-m", "pip", "install", "--upgrade", "build"])
+            await runner.with_exec(
+                ["python3", "-m", "pip", "install", "--upgrade", "build"]
+            )
             .with_exec(["python3", "-m", "build"])
             .directory("dist")
             .export("dist")
