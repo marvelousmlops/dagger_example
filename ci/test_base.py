@@ -44,7 +44,7 @@ async def test_and_publish():
             name="dockerhub_secret", plaintext=os.environ["DOCKERHUB_TOKEN"]
         )
         build = (
-            src.with_directory("ws/dist", client.host().directory("dist"))
+            src.with_directory("/ws/dist", client.host().directory("dist"))
             .docker_build()
             .with_registry_auth(
                 address=f"https://docker.io/{image_ref}",
