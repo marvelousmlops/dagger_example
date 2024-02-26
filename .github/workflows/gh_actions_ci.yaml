@@ -27,7 +27,7 @@ jobs:
         run: |
           python3 -m pip install --upgrade build
           python3 -m build
-          cp dist /tmp/dist
+          cp -r dist /tmp/dist
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -38,6 +38,5 @@ jobs:
       - name: Build model serving docker image
         uses: docker/build-push-action@v2
         with:
-          context: .
           file: Dockerfile
           tags: "marvelousmlops/dagger_example:latest"
