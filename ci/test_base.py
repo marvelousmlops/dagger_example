@@ -45,7 +45,7 @@ async def test_and_publish():
         )
         build = (
             src.with_directory("/tmp/dist", client.host().directory("dist"))
-            .docker_build()
+            .docker_build(dockerfile='Dockerfile_dagger')
             .with_registry_auth(
                 address=f"https://docker.io/{image_ref}",
                 secret=secret,
